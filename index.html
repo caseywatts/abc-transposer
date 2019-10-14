@@ -4,7 +4,7 @@
   <link href="abcjs-midi.css" media="all" rel="stylesheet" type="text/css">
 </head>
 <body>
-  Transpose from C to
+  Instrument Key:
 <select id="transposeToKey">
 </select>
   <button onclick="navigator.clipboard.readText().then((text) => ABCJS.renderAbc('paper', text, {visualTranspose: 5}))">read abc from clipboard</button>
@@ -16,7 +16,10 @@
 <script>
 function generateTransposeOptions() {
   var transposeMap = {
-    "F (up)": 5,
+    "C": 0,
+    "Bb": -2,
+    "Bb (up)": 10,
+    "F": 5,
     "F (down)": -7
   };
 
