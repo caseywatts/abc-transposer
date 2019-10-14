@@ -13,6 +13,18 @@
       text-align: center;
     }
 
+    body {
+      font-family: sans-serif;
+    }
+
+    .title {
+      font-size: xx-large;
+    }
+
+    .instructions {
+      font-size: x-small;
+    }
+
     .pad {
       padding: 5px;
     }
@@ -67,12 +79,13 @@
   </style>
 </head>
 <body class="center">
-  <div class="pad">
-    <div>Copy ABC notation from another website, like <a href="https://folktunefinder.com">folktunefinder.com</a>.</div>
-    <div class="pad">This page will read it from your clipboard and transpose the tune.</div>
-    <div class="toast">
-      <span id='read-from-clipboard' class="round"></span>
-    </div>
+  <div class="title">ABC Transposer</div>
+  <div class="pad instructions">
+    <div>Find a tune on <a href="https://folktunefinder.com">folktunefinder.com</a>. Copy its "ABC notation" to your clipboard.</div>
+    <div class="pad">This tool grabs it from your clipboard and transposes it.</div>
+  </div>
+  <div class="toast">
+    <span id='read-from-clipboard' class="round"></span>
   </div>
   <div class="pad">
     <span class="pad">Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select></span>
@@ -84,7 +97,7 @@
   </div>
   <div class="pad">
     <button onclick="renderFromClipboard()">re-read abc from clipboard</button>
-    <button onclick="renderExample()">display example</button>
+    <button onclick="renderExample()">use an example tune</button>
   </div>
 </body>
 <script>
