@@ -13,7 +13,7 @@
   Instrument Key:
 <select id="transposeToKey">
 </select>
-  <button onclick="navigator.clipboard.readText().then((text) => ABCJS.renderAbc('paper', text, {visualTranspose: 5}))">read abc from clipboard</button>
+  <button onclick="renderFromClipboard()">read abc from clipboard</button>
   <button onclick="renderExample()">example</button>
   <div id="paper"></div>
   <div id="midi"></div>
@@ -39,6 +39,14 @@ function generateTransposeOptions() {
   })
 }
 
+function transposeAmount() {
+  return document.getElementById('transposeToKey').value;
+}
+
+function renderFromClipboard() {
+  navigator.clipboard.readText().then((text) => ABCJS.renderAbc('paper', text, {visualTranspose: transposeAmount()}))
+}
+
 function renderExample() {
   var exampleTune = `X: 33
 T:Old Grey Cat
@@ -50,8 +58,8 @@ K:EDor
 |:"Em"B2e2 e3d|Bdef gfed|"D"A2d2 d3B|ABde fedf|!
 "Em"e2B2 "G"g2B2|"A"a2B2 "B"b4a|gfed BABd|"EM"e4 e4:|!`;
 
-  transposeAmount = document.getElementById('transposeToKey').value;
-  ABCJS.renderAbc('paper', exampleTune, {visualTranspose: transposeAmount});
+
+  ABCJS.renderAbc('paper', exampleTune, {visualTranspose: transposeAmount()});
 }
 
 generateTransposeOptions()
