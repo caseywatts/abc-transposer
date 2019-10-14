@@ -1,0 +1,27 @@
+<html>
+<head>
+  <script src="abcjs_midi_5.8.1-min.js" type="text/javascript"></script>
+  <link href="abcjs-midi.css" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+  Transpose to F
+  <div id="paper"></div>
+  <div id="midi"></div>
+  <a href="#" onclick="navigator.clipboard.readText().then((text) => console.log(text))">click</a>
+</body>
+<script>
+  var tune1 = `
+  X: 33
+  T:Old Grey Cat
+  M:4/4
+  L:1/8
+  K:EDor
+  "Em"e2 e2 E3F|GFGA BABc|"D"d2d2 D3E|FAdB AFED|!
+  "Em"e2e2 E3F|GFGA BABc|"D"dcBA BAGF|"Em"E4 e2:|!
+  |:"Em"B2e2 e3d|Bdef gfed|"D"A2d2 d3B|ABde fedf|!
+  "Em"e2B2 "G"g2B2|"A"a2B2 "B"b4a|gfed BABd|"EM"e4 e4:|!
+  `;
+  ABCJS.renderAbc('paper', tune1, {visualTranspose: 5});
+  // ABCJS.renderMidi('midi', tune1);
+</script>
+</html>
