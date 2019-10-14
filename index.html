@@ -47,6 +47,7 @@
 <body class="center">
   <div class="pad">
     Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select>
+    Octave: <select id="octaveChange" onchange="newOctaveSelected()"></select>
   </div>
   <div class="pad">
     <span id='read-from-clipboard' class="round"></span>
@@ -63,11 +64,18 @@
 <script>
 function generateTransposeOptions() {
   var transposeMap = {
-    "C": 0,
+    "Ab": -4,
+    "A": -3,
     "Bb": -2,
-    "Bb (up)": 10,
+    "B": -1,
+    "C": 0,
+    "C#": 1,
+    "D": 2,
+    "Eb": 3,
+    "E": 4,
     "F": 5,
-    "F (down)": -7
+    "F#": 6,
+    "G": -5
   };
 
   var transposeDropdown = document.getElementById('instrumentKey');
@@ -81,19 +89,56 @@ function generateTransposeOptions() {
 
   var storedValue = window.localStorage.getItem('instrumentKey')
   if (storedValue) {
-    transposeDropdown.value = storedValue
+    transposeDropdown.value = storedValue;
+  } else {
+    transposeDropdown.value = 0;
+  }
+}
+
+function setupOctave() {
+  var octaveMap = {
+    "+3": 36,
+    "+2": 24,
+    "+1": 12,
+    "same": 0,
+    "-1": -12,
+    "-2": -24,
+    "-3": -36
+  }
+
+  var octaveDropdown = document.getElementById('octaveChange');
+  Object.keys(octaveMap).forEach(key => {
+    value = octaveMap[key];
+    var option = document.createElement('option')
+    option.text = key
+    option.value = value
+    octaveDropdown.appendChild(option);
+  })
+
+  var storedValue = window.localStorage.getItem('octaveChange')
+  if (storedValue) {
+    octaveDropdown.value = storedValue;
+  } else {
+    octaveDropdown.value = 0;
   }
 }
 
 function newKeySelected(){
   var transposeDropdown = document.getElementById('instrumentKey');
   window.localStorage.setItem('instrumentKey', transposeDropdown.value);
-  console.log(transposeDropdown.value)
+  renderCurrentTune();
+}
+
+function newOctaveSelected(){
+  var octaveDropdown = document.getElementById('octaveChange');
+  window.localStorage.setItem('octaveChange', octaveDropdown.value);
   renderCurrentTune();
 }
 
 function transposeAmount() {
-  return document.getElementById('instrumentKey').value;
+  var instrumentKeyTransposeAmount = parseInt(document.getElementById('instrumentKey').value);
+  var octaveChangeTransposeAmount = parseInt(document.getElementById('octaveChange').value);
+  return instrumentKeyTransposeAmount + octaveChangeTransposeAmount;
 }
 
 function renderCurrentTune() {
@@ -125,7 +170,10 @@ K:EDor
   renderCurrentTune()
 }
 
+
 generateTransposeOptions()
+setupOctave()
+
 document.addEventListener("DOMContentLoaded", function(event) {
   renderFromClipboard();
 })
