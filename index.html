@@ -86,20 +86,24 @@ function generateTransposeOptions() {
 }
 
 function newKeySelected(){
-
   var transposeDropdown = document.getElementById('instrumentKey');
   window.localStorage.setItem('instrumentKey', transposeDropdown.value);
   console.log(transposeDropdown.value)
-  renderFromClipboard();
+  renderCurrentTune();
 }
 
 function transposeAmount() {
   return document.getElementById('instrumentKey').value;
 }
 
+function renderCurrentTune() {
+  ABCJS.renderAbc('paper', currentTune, {visualTranspose: transposeAmount()});
+}
+
 function renderFromClipboard() {
   navigator.clipboard.readText().then((text) => {
-    ABCJS.renderAbc('paper', text, {visualTranspose: transposeAmount()});
+    currentTune = text;
+    renderCurrentTune()
     document.getElementById('read-from-clipboard').textContent = "automatically reading in abc notation from the clipboard";
     document.getElementById('read-from-clipboard').classList.add("quickFlash")
   })
@@ -116,8 +120,9 @@ K:EDor
 |:"Em"B2e2 e3d|Bdef gfed|"D"A2d2 d3B|ABde fedf|!
 "Em"e2B2 "G"g2B2|"A"a2B2 "B"b4a|gfed BABd|"EM"e4 e4:|!`;
 
+  currentTune = exampleTune
 
-  ABCJS.renderAbc('paper', exampleTune, {visualTranspose: transposeAmount()});
+  renderCurrentTune()
 }
 
 generateTransposeOptions()
