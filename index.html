@@ -46,7 +46,7 @@
 </head>
 <body class="center">
   <div class="pad">
-    Instrument Key: <select id="transposeToKey"></select>
+    Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select>
   </div>
   <div class="pad">
     <span id='read-from-clipboard' class="round"></span>
@@ -70,7 +70,7 @@ function generateTransposeOptions() {
     "F (down)": -7
   };
 
-  var transposeDropdown = document.getElementById('transposeToKey');
+  var transposeDropdown = document.getElementById('instrumentKey');
   Object.keys(transposeMap).forEach(key => {
     value = transposeMap[key];
     var option = document.createElement('option')
@@ -78,10 +78,23 @@ function generateTransposeOptions() {
     option.value = value
     transposeDropdown.appendChild(option);
   })
+
+  var storedValue = window.localStorage.getItem('instrumentKey')
+  if (storedValue) {
+    transposeDropdown.value = storedValue
+  }
+}
+
+function newKeySelected(){
+
+  var transposeDropdown = document.getElementById('instrumentKey');
+  window.localStorage.setItem('instrumentKey', transposeDropdown.value);
+  console.log(transposeDropdown.value)
+  renderFromClipboard();
 }
 
 function transposeAmount() {
-  return document.getElementById('transposeToKey').value;
+  return document.getElementById('instrumentKey').value;
 }
 
 function renderFromClipboard() {
