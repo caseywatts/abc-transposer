@@ -81,24 +81,23 @@
 </head>
 <body class="center">
   <div class="title">Folk Tune Transposer</div>
-  <div class="pad instructions">
-    <div>Find a tune on <a href="https://www.folktunefinder.com">www.folktunefinder.com</a>. Copy its "ABC notation" to your clipboard.</div>
-    <div class="pad">This tool grabs it from your clipboard and transposes it.</div>
-  </div>
-  <div class="toast">
-    <span id='read-from-clipboard' class="round"></span>
-  </div>
   <div class="pad">
     <span class="pad">Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select></span>
     <span class="pad">Octave: <select id="octaveChange" onchange="newOctaveSelected()"></select></span>
   </div>
+  <div class="toast">
+    <span id='flash-message' class="round"></span>
+  </div>
+  <div class="pad instructions">
+    <div class="pad">This tool grabs a tune from your clipboard, stores the tune in the URL, and transposes it.</div>
+    <div>Find a tune on <a href="https://www.folktunefinder.com">www.folktunefinder.com</a>. Copy its "ABC notation" to your clipboard, then "paste" it here.</div>
+  </div>
+  <div class="pad">
+    <button onclick="renderFromClipboard()">Use tune from clipboard</button>
+  </div>
   <div>
     <div id="paper"></div>
     <div id="midi"></div>
-  </div>
-  <div class="pad">
-    <button onclick="renderFromClipboard()">re-read abc from clipboard</button>
-    <button onclick="renderExample()">use an example tune</button>
   </div>
 </body>
 <script>
@@ -188,23 +187,46 @@ function renderCurrentTune() {
   });
 }
 
+function updateUrlToCurrentTune() {
+  window.location.hash = encodeURIComponent(currentTune);
+}
+
+function renderFromURL() {
+  if (window.location.hash) {
+    currentTune = decodeURIComponent(window.location.hash.substr(1));
+    renderCurrentTune();
+    document.getElementById('flash-message').textContent = "tune read from URL";
+    document.getElementById('flash-message').classList.remove('display-none');
+    document.getElementById('flash-message').classList.add("quickFlash")
+    document.getElementById('flash-message').classList.add("goodColor")
+  } else {
+    renderExample();
+  }
+  setTimeout(function(){
+    document.getElementById('flash-message').classList.add('display-none');
+  }, 3000);
+}
+
 function renderFromClipboard() {
   navigator.clipboard.readText().then((text) => {
     currentTune = text;
     renderCurrentTune()
-    document.getElementById('read-from-clipboard').textContent = "tune read from clipboard";
-    document.getElementById('read-from-clipboard').classList.add("quickFlash")
-    document.getElementById('read-from-clipboard').classList.add("goodColor")
+    updateUrlToCurrentTune();
+    document.getElementById('flash-message').textContent = "tune read from clipboard, URL updated";
+    document.getElementById('flash-message').classList.remove('display-none');
+    document.getElementById('flash-message').classList.add("quickFlash")
+    document.getElementById('flash-message').classList.add("goodColor")
   }).catch(() => {
     renderExample()
-    document.getElementById('read-from-clipboard').textContent = "no tune in clipboard, showing example tune";
-    document.getElementById('read-from-clipboard').classList.add("quickFlash")
-    document.getElementById('read-from-clipboard').classList.add("badColor")
+    document.getElementById('flash-message').textContent = "no tune in clipboard, showing example tune";
+    document.getElementById('flash-message').classList.remove('display-none');
+    document.getElementById('flash-message').classList.add("quickFlash")
+    document.getElementById('flash-message').classList.add("badColor")
   })
 
   setTimeout(function(){
-    document.getElementById('read-from-clipboard').className = 'display-none';
-}, 3000);
+    document.getElementById('flash-message').classList.add('display-none');
+  }, 3000);
 }
 
 function renderExample() {
@@ -228,7 +250,8 @@ generateTransposeOptions()
 setupOctave()
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  renderFromClipboard();
+  // renderFromClipboard();
+  renderFromURL();
 })
 
 
