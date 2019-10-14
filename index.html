@@ -181,7 +181,10 @@ function transposeAmount() {
 }
 
 function renderCurrentTune() {
-  ABCJS.renderAbc('paper', currentTune, {visualTranspose: transposeAmount()});
+  ABCJS.renderAbc('paper', currentTune, {
+    visualTranspose: transposeAmount(),
+    responsive: "resize"
+  });
 }
 
 function renderFromClipboard() {
