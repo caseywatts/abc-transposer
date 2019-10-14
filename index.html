@@ -22,35 +22,61 @@
       padding: 10px;
     }
 
+    .toast {
+      display: absolute;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+
+    .display-none {
+      display: none;
+    }
+
     @-webkit-keyframes quickFlash {
-      0%, 100% {
-        background-color: none;
-        /* opacity: 1; */
+      0% {
+        opacity: .8;
       }
-      50% {
-        background-color: lime
+      70% {
+        opacity: .8;
+      }
+      100% {
+        opacity: 0;
       }
     }
 
     .quickFlash {
       -webkit-animation-name: quickFlash;
-      -webkit-animation-duration: 1000ms;
+      -webkit-animation-duration: 3000ms;
       -webkit-animation-iteration-count: 1;
       -webkit-animation-timing-function: ease;
       -moz-animation-name: quickFlash;
-      -moz-animation-duration: 1000ms;
+      -moz-animation-duration: 3000ms;
       -moz-animation-iteration-count: 1;
       -moz-animation-timing-function: ease;
+    }
+
+    .goodColor {
+      background-color: lime;
+    }
+    .badColor {
+      background-color: gray;
     }
   </style>
 </head>
 <body class="center">
   <div class="pad">
-    Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select>
-    Octave: <select id="octaveChange" onchange="newOctaveSelected()"></select>
+    <div>Copy ABC notation from another website, like <a href="https://folktunefinder.com">folktunefinder.com</a>.</div>
+    <div class="pad">This page will read it from your clipboard and transpose the tune.</div>
+    <div class="toast">
+      <span id='read-from-clipboard' class="round"></span>
+    </div>
   </div>
   <div class="pad">
-    <span id='read-from-clipboard' class="round"></span>
+    <span class="pad">Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select></span>
+    <span class="pad">Octave: <select id="octaveChange" onchange="newOctaveSelected()"></select></span>
   </div>
   <div>
     <div id="paper"></div>
@@ -149,9 +175,18 @@ function renderFromClipboard() {
   navigator.clipboard.readText().then((text) => {
     currentTune = text;
     renderCurrentTune()
-    document.getElementById('read-from-clipboard').textContent = "automatically reading in abc notation from the clipboard";
+    document.getElementById('read-from-clipboard').textContent = "tune read from clipboard";
     document.getElementById('read-from-clipboard').classList.add("quickFlash")
+    document.getElementById('read-from-clipboard').classList.add("goodColor")
+  }).catch(() => {
+    document.getElementById('read-from-clipboard').textContent = "failed to read from clipboard";
+    document.getElementById('read-from-clipboard').classList.add("quickFlash")
+    document.getElementById('read-from-clipboard').classList.add("badColor")
   })
+
+  setTimeout(function(){
+    document.getElementById('read-from-clipboard').className = 'display-none';
+}, 3000);
 }
 
 function renderExample() {
