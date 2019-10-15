@@ -3,11 +3,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="abcjs_midi_5.8.1-min.js" type="text/javascript"></script>
   <link href="abcjs-midi.css" media="all" rel="stylesheet" type="text/css">
-  <script type="text/javascript">
-    if ((host !== "localhost:3000") && (window.location.protocol != 'https:')) {
-      window.location.protocol = 'https';
-    }
-  </script>
   <style>
     .center {
       text-align: center;
@@ -273,8 +268,15 @@ K:EDor
 generateTransposeOptions()
 setupOctave()
 
-document.addEventListener("DOMContentLoaded", function(event) {
+function redirectHTTPS() {
+  if ((host !== "localhost:3000") && (window.location.protocol != 'https:')) {
+    window.location.protocol = 'https';
+  }
+}
+
+window.addEventListener("DOMContentLoaded", function(event) {
   // renderFromClipboard();
+  redirectHTTPS();
   renderFromURL();
 })
 
