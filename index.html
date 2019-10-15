@@ -98,6 +98,13 @@
     <div id="paper"></div>
     <div id="midi"></div>
   </div>
+  <div>
+    <button onclick="renderExample()">Try an example tune</button>
+  </div>
+  <div class="instructions">
+    <div>Desktop only. Drag this <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklet</a> to your bookmarks toolbar, and click it while viewing a <a href="https://www.folktunefinder.com">www.FolkTuneFinder.com</a> tune.</div>
+    Bookmarklet: <a href='javascript:(function(){window.location = "https://folktunetransposer.com/#" + encodeURIComponent(document.getElementsByTagName("pre")[0].textContent)})();'>Transpose Tune</a>
+  </div>
 </body>
 <script>
 function generateTransposeOptions() {
