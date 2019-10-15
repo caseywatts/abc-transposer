@@ -13,8 +13,10 @@
       text-align: center;
     }
 
-    body {
+    html, body {
       font-family: sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     .title {
@@ -31,6 +33,17 @@
 
     .round {
       border-radius: 10px;
+      padding: 10px;
+    }
+
+    .footer {
+      background-color: #222;
+      color: white;
+      padding: 10px;
+    }
+
+    .footer a {
+      color: white;
       padding: 10px;
     }
 
@@ -105,6 +118,9 @@
     <div class="pad">Bonus feature! On desktop only:</div>
     <div>Drag this <a href='javascript:(function(){window.location = "https://folktunetransposer.com/#" + encodeURIComponent(document.getElementsByTagName("pre")[0].textContent)})();'>Transpose Tune</a> bookmarklet to your bookmarks toolbar.</div>
     <div>Click it while viewing a tune on <a href="https://www.folktunefinder.com">www.FolkTuneFinder.com</a> to open it here on FolkTuneTransposer.</div>
+  </div>
+  <div class="instructions pad footer">
+    Made by <a href="https://www.twitter.com/kyloma">Casey Watts!</a> using <a href="https://www.abcjs.net">abcjs</a>
   </div>
 </body>
 <script>
