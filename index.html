@@ -270,16 +270,17 @@ generateTransposeOptions()
 setupOctave()
 
 function redirectHTTPS() {
-  if ((host !== "localhost:3000") && (window.location.protocol != 'https:')) {
+  if ((window.location.host !== "localhost:3000") && (window.location.protocol != 'https:')) {
     window.location.protocol = 'https';
   }
 }
 
-window.addEventListener("DOMContentLoaded", function(event) {
+
+window.onload = function(event) {
   // renderFromClipboard();
   redirectHTTPS();
   renderFromURL();
-})
+}
 
 
 // Google Analytics
