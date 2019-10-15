@@ -214,16 +214,11 @@ function renderFromURL() {
   if (window.location.hash) {
     currentTune = decodeURIComponent(window.location.hash.substr(1));
     renderCurrentTune();
-    document.getElementById('flash-message').textContent = "tune read from URL";
-    document.getElementById('flash-message').classList.remove('display-none');
-    document.getElementById('flash-message').classList.add("quickFlash")
-    document.getElementById('flash-message').classList.add("goodColor")
+    toast("tune read from URL", "goodColor");
   } else {
     renderExample();
+    toast("showing example tune", "goodColor");
   }
-  setTimeout(function(){
-    document.getElementById('flash-message').classList.add('display-none');
-  }, 3000);
 }
 
 function renderFromClipboard() {
@@ -231,17 +226,20 @@ function renderFromClipboard() {
     currentTune = text;
     renderCurrentTune()
     updateUrlToCurrentTune();
-    document.getElementById('flash-message').textContent = "tune read from clipboard, URL updated";
-    document.getElementById('flash-message').classList.remove('display-none');
-    document.getElementById('flash-message').classList.add("quickFlash")
-    document.getElementById('flash-message').classList.add("goodColor")
+    toast("tune read from clipboard, URL updated", "goodColor");
   }).catch(() => {
     renderExample()
-    document.getElementById('flash-message').textContent = "no tune in clipboard, showing example tune";
-    document.getElementById('flash-message').classList.remove('display-none');
-    document.getElementById('flash-message').classList.add("quickFlash")
-    document.getElementById('flash-message').classList.add("badColor")
+    toast("no tune in clipboard, showing example tune", "badColor");
   })
+
+
+}
+
+function toast(text, className) {
+  document.getElementById('flash-message').textContent = text;
+  document.getElementById('flash-message').classList.remove('display-none');
+  document.getElementById('flash-message').classList.add("quickFlash")
+  document.getElementById('flash-message').classList.add(className)
 
   setTimeout(function(){
     document.getElementById('flash-message').classList.add('display-none');
