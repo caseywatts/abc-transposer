@@ -107,9 +107,9 @@
     <div id="paper"></div>
     <div id="midi"></div>
   </div>
-  <div>
+  <!-- <div>
     <button onclick="renderExample()">Load an example tune</button>
-  </div>
+  </div> -->
   <div class="instructions pad">
     <div class="pad">Bonus feature! On desktop only:</div>
     <div>Drag this <a href='javascript:(function(){window.location = "https://folktunetransposer.com/#" + encodeURIComponent(document.getElementsByTagName("pre")[0].textContent)})();'>Transpose Tune</a> bookmarklet to your bookmarks toolbar.</div>
@@ -219,7 +219,7 @@ function renderFromURL() {
     document.getElementById('flash-message').classList.add("quickFlash")
     document.getElementById('flash-message').classList.add("goodColor")
   } else {
-    renderFromClipboard();
+    renderExample();
   }
   setTimeout(function(){
     document.getElementById('flash-message').classList.add('display-none');
