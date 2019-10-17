@@ -89,23 +89,35 @@
     #paper {
       width: 80% !important
     }
+
+    .section {
+      border: 1px solid black;
+      margin: 10px;
+      display: inline-block;
+      padding: 10px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body class="center">
-  <div class="title">Folk Tune Transposer</div>
-  <div class="pad">
-    <span class="pad">Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select></span>
-    <span class="pad">Octave: <select id="octaveChange" onchange="newOctaveSelected()"></select></span>
-  </div>
   <div class="toast">
     <span id='flash-message' class="round"></span>
   </div>
-  <div class="pad instructions">
-    <div class="pad">This tool grabs a tune from your clipboard, stores the tune in the URL, and transposes it.</div>
-    <div>Find a tune on <a href="https://www.folktunefinder.com">www.folktunefinder.com</a>. Copy its "ABC notation" to your clipboard, then "paste" it here.</div>
+  <div class="title">Folk Tune Transposer</div>
+  <div class="pad section">
+    <div class="instructions pad">
+      <div>Most tunes are written for instruments in the key of C (like fiddle and piano).</div>
+      <div>If you play a non-C instrument (like Bb clarinet), this tool can help.</div>
+    </div>
+    <div>
+      <span class="pad">Instrument Key: <select id="instrumentKey" onchange="newKeySelected()"></select></span>
+      <span class="pad">Octave: <select id="octaveChange" onchange="newOctaveSelected()"></select></span>
+    </div>
   </div>
-  <div class="pad">
-    <button onclick="renderFromClipboard()">Use tune from clipboard</button>
+  <div class="pad section">
+    <div class="pad">Find a tune on <a href="https://www.folktunefinder.com">www.folktunefinder.com</a>.</div>
+    <div>Copy its "ABC notation" to your clipboard, then "paste" it here.</div>
+    <button onclick="renderFromClipboard()" class="pad">Use tune from clipboard</button>
   </div>
   <div>
     <div id="paper"></div>
