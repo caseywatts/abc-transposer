@@ -80,14 +80,15 @@ html, body {
   background-color: gray;
 }
 
-#paper {
-  width: 80% !important
+.narrower {
+  width: 80%;
+  margin: auto;
 }
 
 .section {
-  border: 1px solid black;
-  margin: 10px;
-  display: inline-block;
-  padding: 10px;
-  border-radius: 10px;
+border: 1px solid black;
+margin: 10px;
+display: inline-block;
+padding: 10px;
+border-radius: 10px;
 }

@@ -7,6 +7,7 @@
 
   <link href="index.css" media="all" rel="stylesheet" type="text/css">
   <link href="abcjs-midi.css" media="all" rel="stylesheet" type="text/css">
+  <link href="https://use.fontawesome.com/491e16d960.css" media="all" rel="stylesheet">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150091503-1"></script>
   <script>
@@ -37,9 +38,9 @@
     <div>Copy its "ABC notation" to your clipboard, then "paste" it here.</div>
     <button onclick="renderFromClipboard()" class="pad">Use tune from clipboard</button>
   </div>
-  <div>
+  <div class="narrower">
     <div id="paper"></div>
-    <div id="midi"></div>
+    <div id="midi" class="abcjs-large"></div>
   </div>
   <!-- <div>
     <button onclick="renderExample()">Load an example tune</button>
