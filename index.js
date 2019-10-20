@@ -1,79 +1,90 @@
-function generateTransposeOptions() {
-  var transposeMap = {
-    "Ab": -4,
-    "A": -3,
-    "Bb": -2,
-    "B": -1,
-    "C": 0,
-    "C#": 1,
-    "D": 2,
-    "Eb": 3,
-    "E": 4,
-    "F": 5,
-    "F#": 6,
-    "G": -5
-  };
+const TRANSPOSE_MAP = {
+  "Ab": -4,
+  "A": -3,
+  "Bb": -2,
+  "B": -1,
+  "C": 0,
+  "C#": 1,
+  "D": 2,
+  "Eb": 3,
+  "E": 4,
+  "F": 5,
+  "F#": 6,
+  "G": -5
+};
 
-  var transposeDropdown = document.getElementById('instrumentKey');
-  Object.keys(transposeMap).forEach(key => {
-    value = transposeMap[key];
+const OCTAVE_MAP = {
+  "+3": 36,
+  "+2": 24,
+  "+1": 12,
+  "same": 0,
+  "-1": -12,
+  "-2": -24,
+  "-3": -36
+}
+
+const selectors = {
+  instrumentKeyDropdown: '#instrumentKey',
+  octaveDropdown: '#octaveChange',
+  flash: '#flash-message'
+}
+
+function el(name) {
+  return document.querySelector(selectors[name]);
+}
+
+
+function generateTransposeOptions() {
+  // populate dropdown options
+  Object.keys(TRANSPOSE_MAP).forEach(key => {
+    value = TRANSPOSE_MAP[key];
     var option = document.createElement('option')
     option.text = key
     option.value = value
-    transposeDropdown.appendChild(option);
+    el('instrumentKeyDropdown').appendChild(option);
   })
 
+  // set default from LocalStorage
   var storedValue = window.localStorage.getItem('instrumentKey')
   if (storedValue) {
-    transposeDropdown.value = storedValue;
+    el('instrumentKeyDropdown').value = storedValue;
   } else {
-    transposeDropdown.value = 0;
+    el('instrumentKeyDropdown').value = 0;
   }
 }
 
 function setupOctave() {
-  var octaveMap = {
-    "+3": 36,
-    "+2": 24,
-    "+1": 12,
-    "same": 0,
-    "-1": -12,
-    "-2": -24,
-    "-3": -36
-  }
-
-  var octaveDropdown = document.getElementById('octaveChange');
-  Object.keys(octaveMap).forEach(key => {
-    value = octaveMap[key];
+  // populate dropdown options
+  Object.keys(OCTAVE_MAP).forEach(key => {
+    value = OCTAVE_MAP[key];
     var option = document.createElement('option')
     option.text = key
     option.value = value
-    octaveDropdown.appendChild(option);
+    el('octaveDropdown').appendChild(option);
   })
 
+  // set default from LocalStorage
   var storedValue = window.localStorage.getItem('octaveChange')
   if (storedValue) {
-    octaveDropdown.value = storedValue;
+    el('octaveDropdown').value = storedValue;
   } else {
-    octaveDropdown.value = 0;
+    el('octaveDropdown').value = 0;
   }
 }
 
-function newKeySelected(){
-  var transposeDropdown = document.getElementById('instrumentKey');
-  window.localStorage.setItem('instrumentKey', transposeDropdown.value);
+function instrumentKeyChanged(){
+  window.localStorage.setItem('instrumentKey', el('instrumentKeyDropdown').value);
   renderCurrentTune();
 }
 
-function newOctaveSelected(){
-  var octaveDropdown = document.getElementById('octaveChange');
-  window.localStorage.setItem('octaveChange', octaveDropdown.value);
+function octaveChanged(){
+  window.localStorage.setItem('octaveChange', el('octaveDropdown').value);
   renderCurrentTune();
 }
 
 function transposeAmount() {
-  var instrumentKeyTransposeAmount = parseInt(document.getElementById('instrumentKey').value);
-  var octaveChangeTransposeAmount = parseInt(document.getElementById('octaveChange').value);
+  var instrumentKeyTransposeAmount = parseInt(el('instrumentKeyDropdown').value);
+  var octaveChangeTransposeAmount = parseInt(el('octaveDropdown').value);
   return instrumentKeyTransposeAmount + octaveChangeTransposeAmount;
 }
 
@@ -114,13 +125,14 @@ function renderFromClipboard() {
 }
 
 function toast(text, className) {
-  document.getElementById('flash-message').textContent = text;
-  document.getElementById('flash-message').classList.remove('display-none');
-  document.getElementById('flash-message').classList.add("quickFlash")
-  document.getElementById('flash-message').classList.add(className)
+  debugger;
+  el('flash').textContent = text;
+  el('flash').classList.remove('display-none');
+  el('flash').classList.add("quickFlash")
+  el('flash').classList.add(className)
 
   setTimeout(function(){
-    document.getElementById('flash-message').classList.add('display-none');
+    el('flash').classList.add('display-none');
   }, 3000);
 }
 
