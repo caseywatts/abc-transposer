@@ -170,9 +170,9 @@ M:4/4
 R:reel
 Q:1/2=120
 L:1/8
-K:D
-"Em"e2e2 E3F  |"Em"GFGA BABc|"D"d2d2 D3E|"D"FAdB AFED|
-"Em"e2e2 E3F|"Em"GFGA BABc|"D"dcBA BAGF|"Em"G2E2E4::
+K:G
+"Em"e2e2 E3F  |"Em"GFGA BAB^c|"D"d2d2 D3E|"D"FAdB AFED|
+"Em"e2e2 E3F|"Em"GFGA BAB^c|"D"d^cBA BAGF|"Em"G2E2E4::
 "Em"B2e2 e3d|"Em"Bdef gfed| "D"A2d2 d3B|ABde fedf|
 "Em"e2B2 "G"g2B2|"A"a2B2 "B"b3a|"B"gfed BABd|"Em"e4 e4 :|`;
 
