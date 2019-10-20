@@ -1,28 +1,4 @@
-const TRANSPOSE_MAP = {
-  "Ab": -4,
-  "A": -3,
-  "Bb": -2,
-  "B": -1,
-  "C": 0,
-  "C#": 1,
-  "D": 2,
-  "Eb": 3,
-  "E": 4,
-  "F": 5,
-  "F#": 6,
-  "G": -5
-};
-
-const OCTAVE_MAP = {
-  "+3": 36,
-  "+2": 24,
-  "+1": 12,
-  "same": 0,
-  "-1": -12,
-  "-2": -24,
-  "-3": -36
-}
-
+// Utility
 const selectors = {
   instrumentKeyDropdown: '#instrumentKey',
   octaveDropdown: '#octaveChange',
@@ -34,108 +10,139 @@ function el(name) {
 }
 
 
-function generateTransposeOptions() {
-  // populate dropdown options
-  Object.keys(TRANSPOSE_MAP).forEach(key => {
-    value = TRANSPOSE_MAP[key];
-    var option = document.createElement('option')
-    option.text = key
-    option.value = value
-    el('instrumentKeyDropdown').appendChild(option);
-  })
+// Transposing UI
+  const TRANSPOSE_MAP = {
+    "Ab": -4,
+    "A": -3,
+    "Bb": -2,
+    "B": -1,
+    "C": 0,
+    "C#": 1,
+    "D": 2,
+    "Eb": 3,
+    "E": 4,
+    "F": 5,
+    "F#": 6,
+    "G": -5
+  };
 
-  // set default from LocalStorage
-  var storedValue = window.localStorage.getItem('instrumentKey')
-  if (storedValue) {
-    el('instrumentKeyDropdown').value = storedValue;
-  } else {
-    el('instrumentKeyDropdown').value = 0;
+  const OCTAVE_MAP = {
+    "+3": 36,
+    "+2": 24,
+    "+1": 12,
+    "same": 0,
+    "-1": -12,
+    "-2": -24,
+    "-3": -36
   }
-}
 
-function setupOctave() {
-  // populate dropdown options
-  Object.keys(OCTAVE_MAP).forEach(key => {
-    value = OCTAVE_MAP[key];
-    var option = document.createElement('option')
-    option.text = key
-    option.value = value
-    el('octaveDropdown').appendChild(option);
-  })
+  function setupInstrumentKeyDropdown() {
+    // populate dropdown options
+    Object.keys(TRANSPOSE_MAP).forEach(key => {
+      value = TRANSPOSE_MAP[key];
+      var option = document.createElement('option')
+      option.text = key
+      option.value = value
+      el('instrumentKeyDropdown').appendChild(option);
+    })
 
-  // set default from LocalStorage
-  var storedValue = window.localStorage.getItem('octaveChange')
-  if (storedValue) {
-    el('octaveDropdown').value = storedValue;
-  } else {
-    el('octaveDropdown').value = 0;
+    // set default from LocalStorage
+    var storedValue = window.localStorage.getItem('instrumentKey')
+    if (storedValue) {
+      el('instrumentKeyDropdown').value = storedValue;
+    } else {
+      el('instrumentKeyDropdown').value = 0;
+    }
   }
-}
 
-function instrumentKeyChanged(){
-  window.localStorage.setItem('instrumentKey', el('instrumentKeyDropdown').value);
-  renderCurrentTune();
-}
+  function setupOctaveDropdown() {
+    // populate dropdown options
+    Object.keys(OCTAVE_MAP).forEach(key => {
+      value = OCTAVE_MAP[key];
+      var option = document.createElement('option')
+      option.text = key
+      option.value = value
+      el('octaveDropdown').appendChild(option);
+    })
 
-function octaveChanged(){
-  window.localStorage.setItem('octaveChange', el('octaveDropdown').value);
-  renderCurrentTune();
-}
+    // set default from LocalStorage
+    var storedValue = window.localStorage.getItem('octaveChange')
+    if (storedValue) {
+      el('octaveDropdown').value = storedValue;
+    } else {
+      el('octaveDropdown').value = 0;
+    }
+  }
 
-function transposeAmount() {
-  var instrumentKeyTransposeAmount = parseInt(el('instrumentKeyDropdown').value);
-  var octaveChangeTransposeAmount = parseInt(el('octaveDropdown').value);
-  return instrumentKeyTransposeAmount + octaveChangeTransposeAmount;
-}
-
-function renderCurrentTune() {
-  ABCJS.renderAbc('paper', currentTune, {
-    visualTranspose: transposeAmount(),
-    responsive: "resize"
-  });
-}
-
-function updateUrlToCurrentTune() {
-  window.location.hash = encodeURIComponent(currentTune);
-}
-
-function renderFromURL() {
-  if (window.location.hash) {
-    currentTune = decodeURIComponent(window.location.hash.substr(1));
+  function instrumentKeyChanged(){
+    window.localStorage.setItem('instrumentKey', el('instrumentKeyDropdown').value);
     renderCurrentTune();
-    toast("tune read from URL", "goodColor");
-  } else {
-    renderExample();
-    toast("showing example tune", "goodColor");
   }
-}
 
-function renderFromClipboard() {
-  navigator.clipboard.readText().then((text) => {
-    currentTune = text;
-    renderCurrentTune()
-    updateUrlToCurrentTune();
-    toast("tune read from clipboard, URL updated", "goodColor");
-  }).catch(() => {
-    renderExample()
-    toast("no tune in clipboard, showing example tune", "badColor");
-  })
+  function octaveChanged(){
+    window.localStorage.setItem('octaveChange', el('octaveDropdown').value);
+    renderCurrentTune();
+  }
+
+  function transposeAmount() {
+    var instrumentKeyTransposeAmount = parseInt(el('instrumentKeyDropdown').value);
+    var octaveChangeTransposeAmount = parseInt(el('octaveDropdown').value);
+    return instrumentKeyTransposeAmount + octaveChangeTransposeAmount;
+  }
+
+  function renderCurrentTune() {
+    ABCJS.renderAbc('paper', currentTune, {
+      visualTranspose: transposeAmount(),
+      responsive: "resize"
+    });
+  }
 
 
-}
+// Tune Storage in URL
+  function updateUrlToCurrentTune() {
+    window.location.hash = encodeURIComponent(currentTune);
+  }
 
-function toast(text, className) {
-  debugger;
-  el('flash').textContent = text;
-  el('flash').classList.remove('display-none');
-  el('flash').classList.add("quickFlash")
-  el('flash').classList.add(className)
+  function renderFromURL() {
+    if (window.location.hash) {
+      currentTune = decodeURIComponent(window.location.hash.substr(1));
+      renderCurrentTune();
+      toast("tune read from URL", "goodColor");
+    } else {
+      renderExample();
+      toast("showing example tune", "goodColor");
+    }
+  }
 
-  setTimeout(function(){
-    el('flash').classList.add('display-none');
-  }, 3000);
-}
 
+// clipboard
+  function renderFromClipboard() {
+    navigator.clipboard.readText().then((text) => {
+      currentTune = text;
+      renderCurrentTune()
+      updateUrlToCurrentTune();
+      toast("tune read from clipboard, URL updated", "goodColor");
+    }).catch(() => {
+      renderExample()
+      toast("no tune in clipboard, showing example tune", "badColor");
+    })
+  }
+
+
+// toast
+  function toast(text, className) {
+    el('flash').textContent = text;
+    el('flash').classList.remove('display-none');
+    el('flash').classList.add("quickFlash")
+    el('flash').classList.add(className)
+
+    setTimeout(function(){
+      el('flash').classList.add('display-none');
+    }, 3000);
+  }
+
+
+// exampleTune
 function renderExample() {
   var exampleTune = `X: 33
 T:Old Grey Cat
@@ -154,23 +161,21 @@ K:EDor
 }
 
 
-function redirectHTTPS() {
-  if ((window.location.host !== "localhost:3000") && (window.location.protocol != 'https:')) {
-    window.location.protocol = 'https';
+// HTTPS
+  function redirectHTTPS() {
+    if ((window.location.host !== "localhost:3000") && (window.location.protocol != 'https:')) {
+      window.location.protocol = 'https';
+    }
   }
-}
 
-window.onload = function(event) {
-  // renderFromClipboard();
-  generateTransposeOptions()
-  setupOctave()
 
-  redirectHTTPS();
-  renderFromURL();
-}
+// Page Setup
+  window.onload = function(event) {
+    // renderFromClipboard();
+    redirectHTTPS();
 
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+    setupInstrumentKeyDropdown();
+    setupOctaveDropdown();
 
-gtag('config', 'UA-150091503-1');
+    renderFromURL();
+  }
