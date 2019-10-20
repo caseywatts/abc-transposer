@@ -1,0 +1,93 @@
+.center {
+  text-align: center;
+}
+
+html, body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  font-size: xx-large;
+}
+
+.instructions {
+  font-size: medium;
+}
+
+.pad {
+  padding: 5px;
+}
+
+.round {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.footer a {
+  color: white;
+  padding: 10px;
+}
+
+.toast {
+  display: absolute;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.display-none {
+  display: none;
+}
+
+@-webkit-keyframes quickFlash {
+  0% {
+    opacity: .8;
+  }
+  70% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.quickFlash {
+  -webkit-animation-name: quickFlash;
+  -webkit-animation-duration: 3000ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-name: quickFlash;
+  -moz-animation-duration: 3000ms;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease;
+}
+
+.goodColor {
+  background-color: lime;
+}
+.badColor {
+  background-color: gray;
+}
+
+#paper {
+  width: 80% !important
+}
+
+.section {
+  border: 1px solid black;
+  margin: 10px;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+}
