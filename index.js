@@ -139,6 +139,15 @@ function el(name) {
     })
   }
 
+  function copyToClipboard() {
+    navigator.clipboard.writeText(currentTune).then(function() {
+      toast("abc copied to clipboard", "goodColor");
+    }).catch(() => {
+      toast("could not copy abc to clipboard", "badColor");
+    })
+  }
+
+
 
 // toast
   function toast(text, className) {
