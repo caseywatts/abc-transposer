@@ -145,15 +145,17 @@ function el(name) {
 
 // exampleTune
 function renderExample() {
-  var exampleTune = `X: 33
+  var exampleTune = `X:25
 T:Old Grey Cat
 M:4/4
+R:reel
+Q:1/2=120
 L:1/8
-K:EDor
-"Em"e2 e2 E3F|GFGA BABc|"D"d2d2 D3E|FAdB AFED|!
-"Em"e2e2 E3F|GFGA BABc|"D"dcBA BAGF|"Em"E4 e2:|!
-|:"Em"B2e2 e3d|Bdef gfed|"D"A2d2 d3B|ABde fedf|!
-"Em"e2B2 "G"g2B2|"A"a2B2 "B"b4a|gfed BABd|"EM"e4 e4:|!`;
+K:D
+"Em"e2e2 E3F  |"Em"GFGA BABc|"D"d2d2 D3E|"D"FAdB AFED|
+"Em"e2e2 E3F|"Em"GFGA BABc|"D"dcBA BAGF|"Em"G2E2E4::
+"Em"B2e2 e3d|"Em"Bdef gfed| "D"A2d2 d3B|ABde fedf|
+"Em"e2B2 "G"g2B2|"A"a2B2 "B"b3a|"B"gfed BABd|"Em"e4 e4 :|`;
 
   currentTune = exampleTune
 
