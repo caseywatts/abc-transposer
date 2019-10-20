@@ -95,7 +95,17 @@ function el(name) {
       visualTranspose: transposeAmount(),
       responsive: "resize"
     });
-    ABCJS.renderMidi('midi', currentTune, { inlineControls: { loopToggle: true } });
+    ABCJS.renderMidi('midi-full', currentTune, {
+      inlineControls: { loopToggle: true }
+    });
+    ABCJS.renderMidi('midi-melody', currentTune, {
+      inlineControls: { loopToggle: true },
+      chordsOff: true
+    });
+    ABCJS.renderMidi('midi-accompaniment', currentTune, {
+      inlineControls: { loopToggle: true },
+      voicesOff: true
+    });
   }
 
 

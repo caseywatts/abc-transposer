@@ -92,3 +92,9 @@ display: inline-block;
 padding: 10px;
 border-radius: 10px;
 }
+
+.playback-title {
+  font-size: xx-large;
+  text-align: left;
+  margin-top: 20px;
+}
