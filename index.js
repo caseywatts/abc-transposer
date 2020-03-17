@@ -115,8 +115,11 @@ function el(name) {
   }
 
   function renderFromURL() {
-    if (window.location.hash) {
-      currentTune = decodeURIComponent(window.location.hash.substr(1));
+    const params = (new URL(document.location)).searchParams;
+    const tuneString = params.get('tune');
+    
+    if (tuneString) {
+      currentTune = tuneString
       renderCurrentTune();
       toast("tune read from URL", "goodColor");
     } else {
