@@ -111,7 +111,7 @@ function el(name) {
 
 // Tune Storage in URL
   function updateUrlToCurrentTune() {
-    window.location.hash = encodeURIComponent(currentTune);
+    window.location.search = `?tune=${encodeURIComponent(currentTune)}`;
   }
 
   function renderFromURL() {
