@@ -197,7 +197,7 @@ K:G
   const GRAND_PIANO_SOUND_FONT_URL = '/';
 
   function configureMIDI() {
-    ABCJS.midi.setSoundFont(GRAND_PIANO_SOUND_FONT_URL)
+//    ABCJS.midi.setSoundFont(GRAND_PIANO_SOUND_FONT_URL)
   }
 
 // Page Setup
