@@ -193,12 +193,12 @@ K:G
     }
   }
 
-// MIDI Configuration
-  const GRAND_PIANO_SOUND_FONT_URL = '/';
+// // MIDI Configuration
+//   const GRAND_PIANO_SOUND_FONT_URL = '/';
 
-  function configureMIDI() {
-//    ABCJS.midi.setSoundFont(GRAND_PIANO_SOUND_FONT_URL)
-  }
+//   function configureMIDI() {
+// //    ABCJS.midi.setSoundFont(GRAND_PIANO_SOUND_FONT_URL)
+//   }
 
 // Page Setup
   window.onload = function(event) {
@@ -208,6 +208,6 @@ K:G
     setupInstrumentKeyDropdown();
     setupOctaveDropdown();
 
-    configureMIDI();
+    // configureMIDI();
     renderFromURL();
   }
