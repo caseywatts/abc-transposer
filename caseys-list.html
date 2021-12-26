@@ -1,0 +1,54 @@
+<script>
+  let googleSheetsId = `1UvSSEEd6HjMQeMcEAgDxPEgxRQIObVle5bELipsI6rY`
+  var googleSheetsPageNumber = "3";
+  let JSONUrl = `https://opensheet.vercel.app/${googleSheetsId}/${googleSheetsPageNumber}`
+
+  fetch(JSONUrl)
+  .then(response => response.json())
+  .then(data => {
+    debugger;
+    data.forEach(item => {
+      //insert
+      document.getElementById('my-list').innerHTML += `
+      <div class="list-item">
+      <a href="${item["Folk Tune Transposer URL"]}">
+      ${item["Tune Name"]}
+      </a>
+      </div>
+      `
+    })
+  })
+</script>
+<style>
+  body {
+    font-family: Quicksand, sans-serif;
+    font-weight: 300;
+    text-align: center;
+    max-width: 30rem;
+    margin: auto;
+  }
+  h1 {
+    font-weight: 200;
+    font-size: 3rem;
+  }
+  .list-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .list-item {
+    background-color:lavender;
+    margin: 1rem;
+    padding: 1rem;
+    display:inline-block;
+    max-width: 20rem;
+    border-radius:1rem;
+  }
+</style>
+<body>
+  <h1>Casey's Favorite Tunes</h1>
+  <div>These are managed in a <a href="https://docs.google.com/spreadsheets/d/1UvSSEEd6HjMQeMcEAgDxPEgxRQIObVle5bELipsI6rY/edit#gid=1721315951">Google Sheet, here</a>.</div>
+  <div id="my-list" class="list-wrapper">
+  </div>
+</body>
