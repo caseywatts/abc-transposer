@@ -234,7 +234,7 @@ de|:"D"f2 fg fedB|"D"A2FA DAFA|"G"B2 GB DBGB|"D"ABAG FAde|
 
 // HTTPS
 function redirectHTTPS() {
-  if ((window.location.host !== "localhost:3000") && (window.location.protocol != 'https:')) {
+  if ((window.location.port !== "3000") && (window.location.protocol != 'https:')) {
     window.location.protocol = 'https';
   }
 }
