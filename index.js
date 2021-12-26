@@ -38,7 +38,6 @@ const OCTAVE_MAP = {
 
 function toggleFullscreen() {
   const bodyTag = document.getElementsByTagName('body')[0]
-  debugger;
   if (bodyTag.classList.contains('fullscreen')) {
     bodyTag.classList.remove('fullscreen');
   } else {
@@ -142,7 +141,6 @@ function CursorControl() {
       var note = ev.elements[i];
       for (var j = 0; j < note.length; j++) {
         note[j].classList.add("highlight");
-        debugger;
       }
     }
 
