@@ -155,6 +155,7 @@ function renderFromURL() {
   if (tuneString) {
     currentTune = tuneString
     renderCurrentTuneVisual();
+    renderCurrentTuneAudio();
     toast("tune read from URL", "goodColor");
   } else {
     renderExample();
@@ -162,11 +163,11 @@ function renderFromURL() {
   }
 }
 
-function readyForAudio() {
-  renderCurrentTuneAudio();
-  document.getElementById('audio').style.display = "block";
-  document.getElementById('show-audio').style.display = "none";
-}
+// function readyForAudio() {
+// renderCurrentTuneAudio();
+// document.getElementById('audio').style.display = "block";
+// document.getElementById('show-audio').style.display = "none";
+// }
 
 
 // clipboard
