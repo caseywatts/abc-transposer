@@ -146,3 +146,20 @@ border-radius: 10px;
 .highlight {
   fill: #0a9ecc;
 }
+
+.fullscreen-toggle {
+  position:absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+body.fullscreen .fullscreen-eighty-percent {
+  max-height: 80vh;
+}
+body.fullscreen .fullscreen-twenty-percent {
+  max-height: 20vh;
+  overflow: auto;
+}
+body.fullscreen .fullscreen-hidden {
+  display: none;
+}

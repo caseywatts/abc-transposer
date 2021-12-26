@@ -36,6 +36,17 @@ const OCTAVE_MAP = {
   "-3": -36
 }
 
+function toggleFullscreen() {
+  const bodyTag = document.getElementsByTagName('body')[0]
+  debugger;
+  if (bodyTag.classList.contains('fullscreen')) {
+    bodyTag.classList.remove('fullscreen');
+  } else {
+    bodyTag.classList.add('fullscreen');
+  }
+
+}
+
 function setupInstrumentKeyDropdown() {
   // populate dropdown options
   Object.keys(TRANSPOSE_MAP).forEach(key => {
