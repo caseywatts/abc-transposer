@@ -122,16 +122,21 @@ function insertAudio(destinationSelector, abc, abcOptions, audioParams) {
   }
 }
 
-function renderCurrentTune() {
+function renderCurrentTuneVisual() {
   let abc = currentTune;
   let abcOptions = {
     visualTranspose: transposeAmount(),
     responsive: "resize"
   };
-
-  //insertAudio also inserts this I think - might be good to not have that update this 3x
   ABCJS.renderAbc('paper', abc, abcOptions);
+}
 
+function renderCurrentTuneAudio() {
+  let abc = currentTune;
+  let abcOptions = {
+    visualTranspose: transposeAmount(),
+    responsive: "resize"
+  };
   insertAudio("#midi-full", abc, abcOptions, {});
   insertAudio("#midi-melody", abc, abcOptions, { chordsOff: true });
   insertAudio("#midi-accompaniment", abc, abcOptions, { voicesOff: true });
@@ -149,12 +154,18 @@ function renderFromURL() {
 
   if (tuneString) {
     currentTune = tuneString
-    renderCurrentTune();
+    renderCurrentTuneVisual();
     toast("tune read from URL", "goodColor");
   } else {
     renderExample();
     toast("showing example tune", "goodColor");
   }
+}
+
+function readyForAudio() {
+  renderCurrentTuneAudio();
+  document.getElementById('audio').style.display = "block";
+  document.getElementById('show-audio').style.display = "none";
 }
 
 
