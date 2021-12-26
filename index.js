@@ -163,6 +163,11 @@ function renderFromURL() {
   }
 }
 
+function renderCurrentTune() {
+  renderCurrentTuneVisual();
+  renderCurrentTuneAudio();
+}
+
 // function readyForAudio() {
 // renderCurrentTuneAudio();
 // document.getElementById('audio').style.display = "block";
