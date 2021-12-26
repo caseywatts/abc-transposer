@@ -6,7 +6,6 @@
   fetch(JSONUrl)
   .then(response => response.json())
   .then(data => {
-    debugger;
     data.forEach(item => {
       //insert
       document.getElementById('my-list').innerHTML += `
