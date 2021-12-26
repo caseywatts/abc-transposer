@@ -1,3 +1,8 @@
+body {
+  font-family: Quicksand, sans-serif;
+  font-weight: 300;
+}
+
 .center {
   text-align: center;
 }
@@ -97,4 +102,42 @@ border-radius: 10px;
   font-size: xx-large;
   text-align: left;
   margin-top: 20px;
+}
+
+#paper {
+  max-height: 0.7vh
+}
+
+.audio-widget {
+  
+}
+
+.playback-title {
+  
+}
+.abcjs-large {
+  
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background: whitesmoke;
+}
+
+.button-link {
+  background: lavender;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  border: 1px solid lavender;
+}
+
+.button-link:hover {
+  border: 1px solid plum;
 }

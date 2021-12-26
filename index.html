@@ -23,35 +23,35 @@
   <div class="toast">
     <span id='flash-message' class="round"></span>
   </div>
-  <div class="title">Folk Tune Transposer</div>
-  <div class="pad section">
-    <div class="instructions pad">
-      <div>Most tunes are written for instruments in the key of C (like fiddle and piano).</div>
-      <div>If you play a non-C instrument (like Bb clarinet), this tool can help.</div>
-    </div>
-    <div>
-      <span class="pad">Instrument Key: <select id="instrumentKey" onchange="instrumentKeyChanged()"></select></span>
-      <span class="pad">Octave: <select id="octaveChange" onchange="octaveChanged()"></select></span>
-    </div>
+  <div class="header">
+      <span class="title">Folk Tune Transposer</span>
+      <span>
+        <div class="pad">
+          <span class="pad">Instrument Key: <select id="instrumentKey" onchange="instrumentKeyChanged()"></select></span>
+          <span class="pad">Octave: <select id="octaveChange" onchange="octaveChanged()"></select></span>
+        </div>
+        <div class="pad">
+          <button onclick="renderFromClipboard()" class="pad">Use abc from clipboard</button>
+          <button onclick="copyToClipboard()" class="pad">Copy abc to clipboard</button>
+        </div>
+      </span>
+      <a class="button-link" href="/caseys-list.html">Casey's Favorite Tunes List</a>
+      <a class="button-link" href="https://www.folktunefinder.com">Folk Tune Finder</a>
+      <a class="button-link" href="https://alpha.onp4.com/@p4/6zf1q">What is ABC Notation?</a>
   </div>
-  <div class="pad section">
-    <div class="pad">Find a tune on <a href="https://www.folktunefinder.com">www.folktunefinder.com</a>.</div>
-    <div>Copy its <a href="https://alpha.onp4.com/@p4/6zf1q">ABC notation</a> to your clipboard, then "paste" it here.</div>
-    <button onclick="renderFromClipboard()" class="pad">Use tune from clipboard</button>
-    <button onclick="copyToClipboard()" class="pad">Copy abc to clipboard</button>
-  </div>
+
   <div class="narrower">
     <div id="paper"></div>
     <div id="audio"></div>
-    <div class="pad">
+    <div class="pad audio-widget">
       <div class="playback-title">Full (Melody + Accompaniment)</div>
       <div id="midi-full" class="abcjs-large"></div>
     </div>
-    <div class="pad">
+    <div class="pad audio-widget">
       <div class="playback-title">Melody</div>
       <div id="midi-melody" class="abcjs-large"></div>
     </div>
-    <div class="pad">
+    <div class="pad audio-widget">
       <div class="playback-title">Accompaniment</div>
       <div id="midi-accompaniment" class="abcjs-large"></div>
     </div>
@@ -59,7 +59,7 @@
   <!-- <div>
     <button onclick="renderExample()">Load an example tune</button>
   </div> -->
-  <div class="instructions pad">
+  <div class="instructions pad section">
     <div class="pad">Bonus feature! On desktop only:</div>
     <div>Drag this <a href='javascript:(function(){window.location = "https://folktunetransposer.com/#" + encodeURIComponent(document.getElementsByTagName("pre")[0].textContent)})();'>Transpose Tune</a> bookmarklet to your bookmarks toolbar.</div>
     <div>Click it while viewing a tune on <a href="https://www.folktunefinder.com">www.FolkTuneFinder.com</a> to open it here on FolkTuneTransposer.</div>
