@@ -188,6 +188,7 @@ function insertAudio(destinationSelector, abc, abcOptions, audioParams) {
     createSynth.init({ visualObj: visualObj[0] }).then(function () {
       synthControl.setTune(visualObj[0], false, audioParams).then(function () {
         console.log("Audio successfully loaded.")
+        synthControl.toggleLoop(); // please do loop by default
       }).catch(function (error) {
         console.warn("Audio problem:", error);
       });
