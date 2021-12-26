@@ -1,3 +1,5 @@
+const notOniPad = !(navigator.userAgent.match(/Mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2)
+
 // Utility
 const selectors = {
   instrumentKeyDropdown: '#instrumentKey',
@@ -93,6 +95,7 @@ function transposeAmount() {
 function insertAudio(destinationSelector, abc, abcOptions, audioParams) {
   if (ABCJS.synth.supportsAudio()) {
     var synthControl = new ABCJS.synth.SynthController();
+    debugger;
     synthControl.load(destinationSelector,
       null,
       {
@@ -122,6 +125,10 @@ function insertAudio(destinationSelector, abc, abcOptions, audioParams) {
   }
 }
 
+function renderCurrentTune() {
+  renderCurrentTuneVisual();
+}
+
 function renderCurrentTuneVisual() {
   let abc = currentTune;
   let abcOptions = {
@@ -148,14 +155,13 @@ function updateUrlToCurrentTune() {
   window.location.search = `?tune=${encodeURIComponent(currentTune)}`;
 }
 
-function renderFromURL() {
+function renderFromURLOrExample() {
   const params = (new URL(document.location)).searchParams;
   const tuneString = params.get('tune');
 
   if (tuneString) {
     currentTune = tuneString
-    renderCurrentTuneVisual();
-    renderCurrentTuneAudio();
+    renderCurrentTune();
     toast("tune read from URL", "goodColor");
   } else {
     renderExample();
@@ -163,18 +169,18 @@ function renderFromURL() {
   }
 }
 
-// function readyForAudio() {
-// renderCurrentTuneAudio();
-// document.getElementById('audio').style.display = "block";
-// document.getElementById('show-audio').style.display = "none";
-// }
+function readyForAudio() {
+  renderCurrentTuneAudio();
+  document.getElementById('audio').style.display = "block";
+  document.getElementById('show-audio').style.display = "none";
+}
 
 
 // clipboard
 function renderFromClipboard() {
   navigator.clipboard.readText().then((text) => {
     currentTune = text;
-    renderCurrentTune()
+    renderCurrentTune();
     updateUrlToCurrentTune();
     toast("tune read from clipboard, URL updated", "goodColor");
   }).catch(() => {
@@ -221,7 +227,7 @@ de|:"D"f2 fg fedB|"D"A2FA DAFA|"G"B2 GB DBGB|"D"ABAG FAde|
 
   currentTune = exampleTune
 
-  renderCurrentTune()
+  renderCurrentTuneVisual()
   updateUrlToCurrentTune();
 }
 
@@ -233,21 +239,18 @@ function redirectHTTPS() {
   }
 }
 
-// // MIDI Configuration
-//   const GRAND_PIANO_SOUND_FONT_URL = '/';
-
-//   function configureMIDI() {
-// //    ABCJS.midi.setSoundFont(GRAND_PIANO_SOUND_FONT_URL)
-//   }
-
 // Page Setup
 window.onload = function (event) {
-  // renderFromClipboard();
   redirectHTTPS();
+}
 
+document.addEventListener('DOMContentLoaded', function () {
   setupInstrumentKeyDropdown();
   setupOctaveDropdown();
 
-  // configureMIDI();
-  renderFromURL();
-}
+  renderFromURLOrExample();
+
+  if (notOniPad) {
+    readyForAudio();
+  }
+});
